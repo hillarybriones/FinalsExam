@@ -1,6 +1,7 @@
 package com.usjr.finalsexam.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +48,7 @@ public class VideoListAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.list_item_video, parent, false);
             holder = new ViewHolder(convertView);
+            convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
@@ -56,6 +58,11 @@ public class VideoListAdapter extends BaseAdapter {
             if (holder.imgThumbnail != null) {
                 Glide.with(mContext).load(video.getThumbnailUrl()).into(holder.imgThumbnail);
             }
+            if(holder.tvTitle != null){
+
+                holder.tvTitle.setText(video.getTitle());
+            }
+
         }
 
         return convertView;
@@ -84,7 +91,10 @@ public class VideoListAdapter extends BaseAdapter {
         TextView  tvTitle;
 
         ViewHolder(View itemView) {
+
             tvTitle = (TextView) itemView.findViewById(R.id.tvTitle);
+            tvTitle.setTextColor(Color.WHITE);
+            imgThumbnail = (ImageView) itemView.findViewById(R.id.imgThumbnail);
         }
     }
 }
